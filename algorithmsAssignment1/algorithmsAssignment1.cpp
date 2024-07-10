@@ -215,13 +215,18 @@ public:
                     string newData;
                     cin >> newData;
                     curr->data.id = stoi(newData);
+                    cout << "This product's id is now: " << curr->data.id;
+                    break;
                 }
                 case '2':
                 {
                     cout << "This product's current name is: " << curr->data.name << " What would you like to change it to?";
                     string newData;
-                    cin >> newData;
+                    cin.ignore();
+                    getline(cin, newData);
                     curr->data.name = newData;
+                    cout << "This product's name is now: " << curr->data.name;
+                    break;
                 }
                 case '3':
                 {
@@ -229,16 +234,27 @@ public:
                     string newData;
                     cin >> newData;
                     curr->data.price = stof(newData);
+                    cout << "This product's price is now: " << curr->data.price;
+                    break;
                 }
                 case '4':
                 {
                     cout << "This product's current category is: " << curr->data.category << " What would you like to change it to?";
                     string newData;
-                    cin >> newData;
+                    cin.ignore();
+                    getline(cin, newData);
                     curr->data.category = newData;
+                    cout << "This product's name is now: " << curr->data.category;
+                    break;
+                }
+                case '5':
+                {
+                    cout << "\nFinished editing great job!\n";
+                    return;
                 }
                 default:
                     cout << "\nBad Input... youve given a bad bad input... you deserved to be punished....\n";
+                    break;
                 }
             }
         }
@@ -404,8 +420,9 @@ int main()
                 products.EditNode(stoi(placehold));
             }
             else if (optionselect == 2) {
+                cin.ignore();
                 cout << "\nPlease insert product name: ";
-                cin >> placehold;
+                getline(cin, placehold);
                 products.EditNode(placehold);
             }
         }

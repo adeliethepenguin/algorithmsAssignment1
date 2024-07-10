@@ -1,4 +1,1 @@
-﻿  algorithmsAssignment1.cpp
-C:\Users\joshu\source\repos\algorithmsAssignment1\algorithmsAssignment1\algorithmsAssignment1.cpp(278,70): warning C4129: 'I': unrecognized character escape sequence
-C:\Users\joshu\source\repos\algorithmsAssignment1\algorithmsAssignment1\algorithmsAssignment1.cpp(323,33): warning C4305: 'argument': truncation from 'double' to 'float'
-  algorithmsAssignment1.vcxproj -> C:\Users\joshu\source\repos\algorithmsAssignment1\x64\Debug\algorithmsAssignment1.exe
+﻿  algorithmsAssignment1.vcxproj -> C:\Users\joshu\source\repos\algorithmsAssignment1\x64\Debug\algorithmsAssignment1.exe
