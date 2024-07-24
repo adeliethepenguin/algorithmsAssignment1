@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <ctype.h>
+#include <windows.h>
 using namespace std;
 
 class Product 
@@ -40,7 +41,7 @@ private:
     ptr head;
     ptr curr;
     ptr temp;
-
+    //PlaySound(TEXT("meow.wav"), NULL, SND_FILENAME | SND_SYNC);
 public:
     LinkedList() 
     {
@@ -332,31 +333,47 @@ public:
 
         int* temp = new int[right - left + 1];
 
-        int i = left;       
+        int i = left;      
         int j = mid + 1;    
         int k = 0;          
 
-        for (int idx = left; idx <= right; idx++) {
-            if (i <= mid && (j > right || arr[i] <= arr[j])) {
+        cout << "\nList of current numbers being sorted:";
+        for (int a = left; a <= right; a++) {
+            cout << " " << arr[a];
+        }
+
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
             }
             else {
+                cout << "\nSwapping " << arr[k] << " and " << arr[j] << endl;
                 temp[k++] = arr[j++];
+
+                cout << "\Swapped " << arr[j-1] << " and " << arr[k - 1] << endl;
+
+                PlaySound(TEXT("meow.wav"), NULL, SND_FILENAME | SND_SYNC);
             }
         }
 
-        for (int idx = left, k = 0; idx <= right; idx++, k++) {
-            arr[idx] = temp[k];
+        while (i <= mid) {
+            temp[k++] = arr[i++];
         }
 
+        while (j <= right) {
+            temp[k++] = arr[j++];
+        }
+
+        for (int a = left, t = 0; a <= right; a++, t++) {
+            arr[a] = temp[t];
+        }
+
+        
         delete[] temp;
     }
 
     void MergeSort(int arr[], int left, int right) {
-        cout << "\nList of current numbers being sorted: ";
-        for (int i = 0; i < right+1; i++) {
-            cout << " " << arr[i];
-        }
+        
 
 
         if (left >= right) {
@@ -544,7 +561,6 @@ int main()
             cout << endl;
             string balls = "";
             cout << "\nNOW WE WILL COMMENCE MERGE SORT. ARE YOU PREPARED FOR A BLOODBATH????? (it doesn't matter what you say. the bloodbath will soon begin) ";
-            cin>>balls;
             
             products.MergeSort(intArray, 0, counter - 1);
 
@@ -554,9 +570,6 @@ int main()
             }
 
             delete[] intArray;
-            cout << "\nHappy now? respond with anything and you will return to main menu.";
-            
-            cin >> balls;
 
         }
     }
