@@ -347,12 +347,13 @@ public:
                 temp[k++] = arr[i++];
             }
             else {
-                cout << "\nSwapping " << arr[k] << " and " << arr[j] << endl;
+                cout << "\nMoving " << arr[j] << " to " << arr[k] << "'s position";
+                PlaySound(TEXT("meow.wav"), NULL, SND_FILENAME | SND_SYNC);
                 temp[k++] = arr[j++];
 
-                cout << "\Swapped " << arr[j-1] << " and " << arr[k - 1] << endl;
+                cout << "\nFinished moving\n";
 
-                PlaySound(TEXT("meow.wav"), NULL, SND_FILENAME | SND_SYNC);
+                
             }
         }
 
@@ -373,7 +374,10 @@ public:
     }
 
     void MergeSort(int arr[], int left, int right) {
-        
+        cout << "\nCurrent cut:";
+        for (int a = left; a <= right; a++) {
+            cout << " " << arr[a];
+        }
 
 
         if (left >= right) {
