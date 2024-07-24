@@ -326,6 +326,47 @@ public:
             curr = curr->next;
         }
     };
+    void CompareSwap(int arr[], int left, int mid, int right) {
+        int n1 = mid - left + 1;    
+        int n2 = right - mid;       
+
+        int* temp = new int[right - left + 1];
+
+        int i = left;       
+        int j = mid + 1;    
+        int k = 0;          
+
+        for (int idx = left; idx <= right; idx++) {
+            if (i <= mid && (j > right || arr[i] <= arr[j])) {
+                temp[k++] = arr[i++];
+            }
+            else {
+                temp[k++] = arr[j++];
+            }
+        }
+
+        for (int idx = left, k = 0; idx <= right; idx++, k++) {
+            arr[idx] = temp[k];
+        }
+
+        delete[] temp;
+    }
+
+    void MergeSort(int arr[], int left, int right) {
+        cout << "\nList of current numbers being sorted: ";
+        for (int i = 0; i < right+1; i++) {
+            cout << " " << arr[i];
+        }
+
+
+        if (left >= right) {
+            return; // Base case: array with 1 element is already sorted
+        }
+        int mid = left + (right - left) / 2;
+        MergeSort(arr, left, mid);      // Sort left half
+        MergeSort(arr, mid + 1, right); // Sort right half
+        CompareSwap(arr, left, mid, right);
+    }
 
 
 };
@@ -383,7 +424,7 @@ int main()
     string placehold;
     while (true) 
     {
-        cout << "\nYour options are as follows!\n1. Insert new product\n2. Update a product's details\n3. Delete a product\n4. Search for a product\n5. View all products\n6. Bubble sort ACTIVATE!\n";
+        cout << "\nYour options are as follows!\n1. Insert new product\n2. Update a product's details\n3. Delete a product\n4. Search for a product\n5. View all products\n6. Bubble sort ACTIVATE!\n7. Do merge sort stuff"<<endl;
         cin >> optionselect;
 
         if (optionselect == 1)
@@ -465,6 +506,58 @@ int main()
         }
         else if (optionselect == 6) {
             products.BubbleBobbleSortForever();
+        }
+        else if (optionselect == 7) {
+            cout << "\nPlease give us an array by inputing a series of numbers with spaces inbetween them, no whitespace at the end. Ex: '5 2 3 10 500 0'"<<endl;
+            string mergeArray;
+            cin.ignore();
+            getline(cin, mergeArray);
+            int counter = 1;
+            for (int i = 0; i < mergeArray.length(); i++) {
+                if (mergeArray[i] == ' ') {
+                    counter++;
+                }
+            }
+
+            int *intArray= new int[counter+1];
+
+            int arrayIndex = 0;
+            string tempstr = "";
+            for (int i = 0; i <= mergeArray.length(); i++)
+            {
+                    if (i == mergeArray.length() || mergeArray[i] == ' ') {
+                        
+                        if (!tempstr.empty()) {
+                            intArray[arrayIndex++] = stoi(tempstr);
+                            tempstr.clear();
+                        }
+                    }
+                    else {
+                        tempstr += mergeArray[i];
+                    }
+                    
+            }
+            cout << "THE VALUES OF THE ARRAY CREATED ARE:";
+            for (int i = 0; i < counter; i++) {
+                cout << " " << intArray[i];
+            }
+            cout << endl;
+            string balls = "";
+            cout << "\nNOW WE WILL COMMENCE MERGE SORT. ARE YOU PREPARED FOR A BLOODBATH????? (it doesn't matter what you say. the bloodbath will soon begin) ";
+            cin>>balls;
+            
+            products.MergeSort(intArray, 0, counter - 1);
+
+            cout << "\n THE VALUES OF THE SORTED ARRAY ARE: \n";
+            for (int i = 0; i < counter; i++) {
+                cout << " " << intArray[i];
+            }
+
+            delete[] intArray;
+            cout << "\nHappy now? respond with anything and you will return to main menu.";
+            
+            cin >> balls;
+
         }
     }
 
